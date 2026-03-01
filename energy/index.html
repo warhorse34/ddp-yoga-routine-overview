@@ -25,77 +25,59 @@
     const DEFAULT_DURATION = 15;
 
     const initialMoves = [
-      { name: "Pinfall position - Deep Breaths", cue: "Hands on Belly", section: "Warm-Up", duration: 15 },
-      { name: "Table into Cat Arch and Cat Lift (2 times)", cue: "", section: "Warm-Up", duration: 10 },
-      { name: "Push up into Down Dog into Walk Dog", cue: "curl toes", section: "Warm-Up", duration: 10 },
-      { name: "Lower into Table and then Plank – Hold", cue: "hold", section: "Warm-Up", duration: 10 },
-      { name: "Lower/Hold/Back to Plank (times 2)", cue: "lower slowly, repeat", section: "Warm-Up", duration: 15 },
-      { name: "Cobra into Down Dog - step or pounce", cue: "Step or pounce when done", section: "Warm-Up", duration: 10 },
-      { name: "Huddle Up, Forward Fold slowly up to touchdown", cue: "", section: "Warm-Up", duration: 10 },
-      { name: "Return to Standing, Glute Squeeze – Grab Ball (D.R)", cue: "fingers are fire hydrants", section: "Ignition", duration: 10 },
-      { name: "Inhale into Touchdown, exhale take it down (2 times)", cue: "", section: "Ignition", duration: 12 },
-      { name: "Diamond Cutter - Hulk it Up", cue: "look through your diamond", section: "Ignition", duration: 8 },
-      { name: "Shake Out", cue: "", section: "Ignition", duration: 5 },
-      { name: "Touchdown – Gimme Gimme (left, right 2 times) back to Diamond Cutter", cue: "alternate", section: "Ignition", duration: 15 },
-      { name: "Touchdown – Huddle Up", cue: "", section: "Ignition", duration: 5 },
-      { name: "Fold Forward – Back to Bent Bar Back", cue: "", section: "Ignition", duration: 8 },
-      { name: "Fold Forward", cue: "", section: "Ignition", duration: 5 },
-      { name: "Standing Split – Right Leg Up", cue: "", section: "Balance", duration: 10 },
-      { name: "Down into Runner's Lunge to Supported Lunge", cue: "", section: "Balance", duration: 10 },
-      { name: "Lunge – Grab Ball", cue: "", section: "Balance", duration: 10 },
-      { name: "DR Rows - Pull-In and push out (Dynamic Resistance) - 3 times", cue: "", section: "Balance", duration: 18 },
-      { name: "Sweep up into SuperStar", cue: "", section: "Balance", duration: 5 },
-      { name: "Right Hand Block – twist Left Hand Up", cue: "", section: "Balance", duration: 10 },
-      { name: "Up into Supported Lunge – Dynamic Resistance Punches", cue: "", section: "Balance", duration: 15 },
-      { name: "Sweep up into SuperStar", cue: "", section: "Balance", duration: 5 },
-      { name: "lean forward into Space Shuttle", cue: "", section: "Balance", duration: 8 },
-      { name: "Blast Off – Explode into Touchdown", cue: "", section: "Balance", duration: 5 },
-      { name: "Diamond Cutter – Shake Out", cue: "", section: "Balance", duration: 8 },
-      { name: "Water Break", cue: "", section: "Break", duration: 10 },
-      { name: "Touchdown – Huddle Up", cue: "", section: "Balance", duration: 8 },
-      { name: "Fold Forward – Back to Bent Bar Back", cue: "", section: "Balance", duration: 10 },
-      { name: "Reverse It - Standing Split – Left Leg Up", cue: "", section: "Balance", duration: 10 },
-      { name: "Down into Runner's Lunge to Supported Lunge", cue: "", section: "Balance", duration: 15 },
-      { name: "Lunge – Grab Ball", cue: "", section: "Balance", duration: 15 },
-      { name: "Rows - Pull-Ins and push out (Dynamic Resistance) - 5 times", cue: "", section: "Balance", duration: 20 },
-      { name: "Arms up to SuperStart", cue: "", section: "Balance", duration: 8 },
-      { name: "Right Hand Block – twist Left Hand Up", cue: "", section: "Balance", duration: 10 },
-      { name: "Up into Supported Lunge – Dynamic Resistance Punches", cue: "", section: "Balance", duration: 15 },
-      { name: "Sweep up into SuperStar", cue: "", section: "Balance", duration: 5 },
-      { name: "lean forward into Space Shuttle", cue: "", section: "Balance", duration: 8 },
-      { name: "Blast Off – Explode into Touchdown", cue: "", section: "Balance", duration: 5 },
-      { name: "Diamond Cutter – Shake Out", cue: "", section: "Balance", duration: 8 },
-      { name: "Water Break", cue: "", section: "Break", duration: 10 },
-      { name: "Grab Ball – Touchdown - Gimme Gimme", cue: "", section: "Power", duration: 15 },
-      { name: "Exploding Knees - 5 times each side", cue: "", section: "Power", duration: 20 },
-      { name: "Touchdown – Diamond Cutter", cue: "", section: "Power", duration: 10 },
-      { name: "Huddle Up – Bar Back", cue: "", section: "Power", duration: 15 },
-      { name: "Plank", cue: "", section: "Power", duration: 10 },
-      { name: "Lower for 3", cue: "", section: "Power", duration: 8 },
-      { name: "Cobra to Down Dog to Safety Zone", cue: "", section: "Floor", duration: 15 },
-      { name: "Cat Arch  / Cat Lift (3 times)", cue: "", section: "Floor", duration: 15 },
-      { name: "Split Table", cue: "", section: "Floor", duration: 15 },
-      { name: "Split Table - Repeat Other Side", cue: "", section: "Floor", duration: 15 },
-      { name: "Table Wag the Tail", cue: "", section: "Floor", duration: 10 },
-      { name: "Cat Arch  / Cat Lift (3 times)", cue: "", section: "Floor", duration: 15 },
-      { name: "Safety Zone", cue: "", section: "Floor", duration: 10 },
-      { name: "Walk Hand Across Mat", cue: "", section: "Floor", duration: 8 },
-      { name: "Walk Hand Across Mat Repeat Other Side", cue: "", section: "Floor", duration: 8 },
-      { name: "Safety Zone", cue: "", section: "Floor", duration: 5 },
-      { name: "Come around onto Glutes", cue: "", section: "Going Home", duration: 5 },
-      { name: "Human Cannonball", cue: "", section: "Going Home", duration: 8 },
-      { name: "Bridge - squeeze glutes", cue: "", section: "Going Home", duration: 8 },
-      { name: "Repeat Human Cannonball to Bridge (2 more times)", cue: "", section: "Going Home", duration: 15 },
-      { name: "Pinfall into Easy Twist (flop to right) - Knee Cross - breathe", cue: "", section: "Going Home", duration: 15 },
-      { name: "Pinfall to Bridge to Human Cannonball - 2 times", cue: "", section: "Going Home", duration: 15 },
-      { name: "Pinfall into Easy Twist (flop to left) - Opposite Knee Cross - breathe", cue: "", section: "Going Home", duration: 15 },
-      { name: "Pinfall to Bridge to Human Cannonball - 2 times", cue: "", section: "Going Home", duration: 10 },
-      { name: "Tight Tight Tight - kick out", cue: "", section: "Going Home", duration: 10 },
-      { name: "Bend Knee, flop open relax – repeat opposite knee", cue: "", section: "Going Home", duration: 10 },
-      { name: "Dead Man - relax", cue: "", section: "Finish", duration: 15 },
-      { name: "roll up", cue: "", section: "Finish", duration: 5 },
-      { name: "Stretch Forward - repeat", cue: "", section: "Finish", duration: 8 },
-      { name: "Bang", cue: "", section: "Finish", duration: 5 },
+      { name: "Supine Breathing", cue: "On your back, breathe deep", section: "Warm-Up" },
+      { name: "Table into Cat Arch and Cat Stretch", cue: "×3", section: "Warm-Up" },
+      { name: "Down Dog into Walk Dog", cue: "Pedal it out", section: "Warm-Up" },
+      { name: "Plank – Hold", cue: "Stay tight", section: "Warm-Up", duration: 10 },
+      { name: "Lower/Hold/Back to Plank", cue: "x3", section: "Warm-Up" },
+      { name: "Cobra into Down Dog", cue: "stretch", section: "Warm-Up" },
+      { name: "Return to Standing then Forward Fold", cue: "Breathe and hang", section: "Standing" },
+      { name: "Return to Standing, Glute Squeeze – Grab Ball", cue: "Squeeze and hold", section: "Standing" },
+      { name: "Touchdown", cue: "×2", section: "Standing" },
+      { name: "Diamond Cutter", cue: "Look through your diamond", section: "Standing" },
+      { name: "Shake Out", cue: "Shake it loose", section: "Standing" },
+      { name: "Touchdown – Gimme Gimme (left, right)", cue: "×2", section: "Standing" },
+      { name: "Touchdown – Bent Bar Back", cue: "Pull it back", section: "Standing" },
+      { name: "Fold Forward – Back to Bent Bar Back", cue: "Back to bar back", section: "Standing" },
+      { name: "Fold Forward – Hold + return to Bent Bar Back", cue: "Hold and pull", section: "Standing" },
+      { name: "Standing Split – Right Leg", cue: "Breathe, 5 seconds", section: "Balance", duration: 5 },
+      { name: "Runner's Lunge to Supported Lunge", cue: "Flow between both", section: "Balance" },
+      { name: "Lunge – Grab Ball", cue: "Stay low", section: "Balance" },
+      { name: "Pull-Ins", cue: "×3", section: "Balance" },
+      { name: "Right Hand Block – Left Hand Up", cue: "Align and squeeze glutes", section: "Balance" },
+      { name: "Lunge – Dynamic Resistance Punches", cue: "×3 punches", section: "Power" },
+      { name: "Blast Off – Explode", cue: "×10, give it everything", section: "Power" },
+      { name: "Diamond Cutter – Shake Out", cue: "Water break!", section: "Power", duration: 30 },
+      { name: "Grab Ball – Gimme Gimme", cue: "Pull pull pull", section: "Power" },
+      { name: "Exploding Knees", cue: "5 each side", section: "Power" },
+      { name: "Touchdown – Diamond Cutter", cue: "Flow together", section: "Power" },
+      { name: "Huddle Up – Bar Back", cue: "Into huddle position", section: "Cool-Down" },
+      { name: "Plank to Alligator to Down", cue: "10 – lower 3 – alligator 3", section: "Cool-Down" },
+      { name: "Cobra to Down Dog to Safety Zone", cue: "Flow to safety zone", section: "Cool-Down" },
+      { name: "Cat Arch", cue: "×3, slow and deep", section: "Cool-Down" },
+      { name: "Split Table", cue: "×10", section: "Floor" },
+      { name: "Repeat Other Side", cue: "Same sequence", section: "Floor" },
+      { name: "Wag the Tail", cue: "Side to side", section: "Floor" },
+      { name: "Cat Arch", cue: "×3", section: "Floor" },
+      { name: "Safety Zone", cue: "Rest and breathe", section: "Floor" },
+      { name: "Walk Hand Across Mat", cue: "Slow and controlled", section: "Floor" },
+      { name: "Repeat Other Side", cue: "Mirror it", section: "Floor" },
+      { name: "Safety Zone", cue: "Rest and breathe", section: "Floor" },
+      { name: "Glute Squeeze", cue: "Squeeze and hold", section: "Floor" },
+      { name: "Human Cannonball", cue: "Curl up tight", section: "Floor" },
+      { name: "Bridge", cue: "Hips up, squeeze", section: "Floor" },
+      { name: "Repeat", cue: "Same side", section: "Floor" },
+      { name: "Knee Cross", cue: "Cross and hold", section: "Floor" },
+      { name: "Human Cannonball – Bridge", cue: "Flow between both", section: "Floor" },
+      { name: "Other Knee", cue: "Switch sides", section: "Floor" },
+      { name: "Human Cannonball – Bridge", cue: "Flow between both", section: "Floor" },
+      { name: "Human Cannonball – Bridge", cue: "Flow between both", section: "Floor" },
+      { name: "Tight Tight", cue: "Everything tight", section: "Floor" },
+      { name: "Kneeling – Bent Knee", cue: "Find your balance", section: "Floor" },
+      { name: "Dead Man", cue: "Relax completely", section: "Finish" },
+      { name: "Glute Squeeze", cue: "Last one!", section: "Finish" },
+      { name: "Stretch Forward", cue: "×3", section: "Finish" },
+      { name: "Bang", cue: "You did it! 💥", section: "Finish" },
     ];
 
     const sectionColors = {
@@ -298,6 +280,13 @@
 
       const t = timeLeft ?? totalDuration;
       const circumference = 2 * Math.PI * 52;
+
+      // Time remaining = current exercise time left + all future exercise durations
+      const futureSeconds = moves.slice(current + 1).reduce((sum, m) => sum + (m.duration || 15), 0);
+      const totalSecondsLeft = (t ?? 0) + futureSeconds;
+      const minsLeft = Math.floor(totalSecondsLeft / 60);
+      const secsLeft = totalSecondsLeft % 60;
+      const timeRemaining = `${minsLeft}:${String(secsLeft).padStart(2, '0')}`;
       const dashOffset = circumference * (1 - Math.max(0, Math.min(1, t / totalDuration)));
       const progressPct = (current / (moves.length - 1)) * 100;
 
@@ -314,6 +303,11 @@
               DDP YOGA · ENERGY
             </div>
             <div style={{ display: "flex", gap: "0.8rem", alignItems: "center" }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+                <span style={{ fontSize: "1rem", fontWeight: "700", color: "#FFFFFF", fontVariantNumeric: "tabular-nums" }}>{timeRemaining}</span>
+                <span style={{ fontSize: "0.55rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#444" }}>remaining</span>
+              </div>
+              <span style={{ color: "#2A2A2A", fontSize: "0.8rem" }}>|</span>
               <span style={{ fontSize: "0.8rem", color: "#444" }}>{current + 1} / {moves.length}</span>
               <button onClick={() => setEditing(true)} style={{
                 background: "none", border: "1px solid #2A2A2A", color: "#666",
