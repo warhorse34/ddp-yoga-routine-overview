@@ -25,77 +25,79 @@
     const DEFAULT_DURATION = 15;
 
     const initialMoves = [
-      { name: "Pinfall position - Deep Breaths", cue: "Hands on Belly", section: "Warm-Up", duration: 15 },
-      { name: "Table into Cat Arch and Cat Lift (2 times)", cue: "", section: "Warm-Up", duration: 10 },
-      { name: "Push up into Down Dog into Walk Dog", cue: "curl toes", section: "Warm-Up", duration: 10 },
+      { name: "Pinfall position - Deep Breaths", cue: "Hands on Belly", section: "Warm-Up", duration: 25 },
+      { name: "Table into Cat Arch and Cat Lift (2 times)", cue: "", section: "Warm-Up", duration: 14 },
+      { name: "Push up into Down Dog into Walk Dog", cue: "curl toes", section: "Warm-Up", duration: 14 },
       { name: "Lower into Table and then Plank – Hold", cue: "hold", section: "Warm-Up", duration: 10 },
       { name: "Lower/Hold/Back to Plank (times 2)", cue: "lower slowly, repeat", section: "Warm-Up", duration: 15 },
-      { name: "Cobra into Down Dog - step or pounce", cue: "Step or pounce when done", section: "Warm-Up", duration: 10 },
-      { name: "Huddle Up, Forward Fold slowly up to touchdown", cue: "", section: "Warm-Up", duration: 10 },
+      { name: "Cobra into Down Dog - step or pounce", cue: "Step or pounce when done", section: "Warm-Up", duration: 14 },
+      { name: "Huddle Up, Forward Fold slowly up to touchdown", cue: "", section: "Warm-Up", duration: 15 },
       { name: "Return to Standing, Glute Squeeze – Grab Ball (D.R)", cue: "fingers are fire hydrants", section: "Ignition", duration: 10 },
-      { name: "Inhale into Touchdown, exhale take it down (2 times)", cue: "", section: "Ignition", duration: 12 },
-      { name: "Diamond Cutter - Hulk it Up", cue: "look through your diamond", section: "Ignition", duration: 8 },
+      { name: "Inhale into Touchdown, exhale take it down (2 times)", cue: "", section: "Ignition", duration: 15 },
+      { name: "Diamond Cutter - Hulk it Up", cue: "look through your diamond", section: "Ignition", duration: 12 },
       { name: "Shake Out", cue: "", section: "Ignition", duration: 5 },
-      { name: "Touchdown – Gimme Gimme (left, right 2 times) back to Diamond Cutter", cue: "alternate", section: "Ignition", duration: 15 },
-      { name: "Touchdown – Huddle Up", cue: "", section: "Ignition", duration: 5 },
+      { name: "Grab Ball into Touchdown – Gimme Gimme (left, right 2 times)", cue: "alternate", section: "Ignition", duration: 20 },
+      { name: "Diamond Cutter and shake it out", cue: "", section: "Ignition", duration: 15 },
+      { name: "Grab ball into Touchdown – Huddle Up", cue: "", section: "Ignition", duration: 8 },
+      { name: "Fold Forward – Back to Bent Bar Back", cue: "chin tucked", section: "Ignition", duration: 8 },
       { name: "Fold Forward – Back to Bent Bar Back", cue: "", section: "Ignition", duration: 8 },
-      { name: "Fold Forward", cue: "", section: "Ignition", duration: 5 },
-      { name: "Standing Split – Right Leg Up", cue: "", section: "Balance", duration: 10 },
-      { name: "Down into Runner's Lunge to Supported Lunge", cue: "", section: "Balance", duration: 10 },
-      { name: "Lunge – Grab Ball", cue: "", section: "Balance", duration: 10 },
-      { name: "DR Rows - Pull-In and push out (Dynamic Resistance) - 3 times", cue: "", section: "Balance", duration: 18 },
-      { name: "Sweep up into SuperStar", cue: "", section: "Balance", duration: 5 },
-      { name: "Right Hand Block – twist Left Hand Up", cue: "", section: "Balance", duration: 10 },
-      { name: "Up into Supported Lunge – Dynamic Resistance Punches", cue: "", section: "Balance", duration: 15 },
+      { name: "Fold forward into Standing Split – Right Leg Up", cue: "", section: "Balance", duration: 14 },
+      { name: "Down into Runner's Lunge to Supported Lunge", cue: "", section: "Balance", duration: 12 },
+      { name: "Lunge – Grab Ball", cue: "deep breath", section: "Balance", duration: 10 },
+      { name: "DR Rows - Pull-In and push out (Dynamic Resistance) - 3 times", cue: "breath in on pull, out on push", section: "Balance", duration: 23 },
+      { name: "Sweep up into SuperStar", cue: "", section: "Balance", duration: 7 },
+      { name: "Right Hand to mat – twist Left Hand Up", cue: "", section: "Balance", duration: 15 },
+      { name: "Up into Supported Lunge – Dynamic Resistance Punches (3)", cue: "", section: "Balance", duration: 22 },
       { name: "Sweep up into SuperStar", cue: "", section: "Balance", duration: 5 },
       { name: "lean forward into Space Shuttle", cue: "", section: "Balance", duration: 8 },
-      { name: "Blast Off – Explode into Touchdown", cue: "", section: "Balance", duration: 5 },
-      { name: "Diamond Cutter – Shake Out", cue: "", section: "Balance", duration: 8 },
+      { name: "Blast Off – Explode into Touchdown", cue: "", section: "Balance", duration: 7 },
+      { name: "Diamond Cutter – Shake Out", cue: "", section: "Balance", duration: 12 },
       { name: "Water Break", cue: "", section: "Break", duration: 10 },
-      { name: "Touchdown – Huddle Up", cue: "", section: "Balance", duration: 8 },
-      { name: "Fold Forward – Back to Bent Bar Back", cue: "", section: "Balance", duration: 10 },
-      { name: "Reverse It - Standing Split – Left Leg Up", cue: "", section: "Balance", duration: 10 },
-      { name: "Down into Runner's Lunge to Supported Lunge", cue: "", section: "Balance", duration: 15 },
+      { name: "Grab ball into Touchdown – Huddle Up", cue: "", section: "Balance", duration: 8 },
+      { name: "Fold Forward – Back to Bent Bar Back", cue: "", section: "Balance", duration: 8 },
+      { name: "Reverse It - Standing Split – Left Leg Up", cue: "", section: "Balance", duration: 14 },
+      { name: "Down into Runner's Lunge to Supported Lunge", cue: "", section: "Balance", duration: 12 },
       { name: "Lunge – Grab Ball", cue: "", section: "Balance", duration: 15 },
-      { name: "Rows - Pull-Ins and push out (Dynamic Resistance) - 5 times", cue: "", section: "Balance", duration: 20 },
-      { name: "Arms up to SuperStart", cue: "", section: "Balance", duration: 8 },
-      { name: "Right Hand Block – twist Left Hand Up", cue: "", section: "Balance", duration: 10 },
-      { name: "Up into Supported Lunge – Dynamic Resistance Punches", cue: "", section: "Balance", duration: 15 },
+      { name: "DR Rows - Pull-In and push out (Dynamic Resistance) - 3 times", cue: "breath in on pull, out on push", section: "Balance", duration: 23 },
+      { name: "Sweep up into SuperStar", cue: "", section: "Balance", duration: 7 },
+      { name: "Left fist to mat - twist Right Hand Up", cue: "open fingers wide", section: "Balance", duration: 15 },
+      { name: "Up into Supported Lunge – Dynamic Resistance Punches (3)", cue: "", section: "Balance", duration: 22 },
       { name: "Sweep up into SuperStar", cue: "", section: "Balance", duration: 5 },
       { name: "lean forward into Space Shuttle", cue: "", section: "Balance", duration: 8 },
-      { name: "Blast Off – Explode into Touchdown", cue: "", section: "Balance", duration: 5 },
-      { name: "Diamond Cutter – Shake Out", cue: "", section: "Balance", duration: 8 },
+      { name: "Blast Off – Explode into Touchdown", cue: "", section: "Balance", duration: 7 },
+      { name: "Diamond Cutter – Shake Out", cue: "", section: "Balance", duration: 12 },
       { name: "Water Break", cue: "", section: "Break", duration: 10 },
       { name: "Grab Ball – Touchdown - Gimme Gimme", cue: "", section: "Power", duration: 15 },
-      { name: "Exploding Knees - 5 times each side", cue: "", section: "Power", duration: 20 },
-      { name: "Touchdown – Diamond Cutter", cue: "", section: "Power", duration: 10 },
+      { name: "Exploding Knees - 5 times each side", cue: "", section: "Power", duration: 15 },
+      { name: "Touchdown – Diamond Cutter", cue: "", section: "Power", duration: 12 },
       { name: "Huddle Up – Bar Back", cue: "", section: "Power", duration: 15 },
-      { name: "Plank", cue: "", section: "Power", duration: 10 },
-      { name: "Lower for 3", cue: "", section: "Power", duration: 8 },
-      { name: "Cobra to Down Dog to Safety Zone", cue: "", section: "Floor", duration: 15 },
-      { name: "Cat Arch  / Cat Lift (3 times)", cue: "", section: "Floor", duration: 15 },
-      { name: "Split Table", cue: "", section: "Floor", duration: 15 },
-      { name: "Split Table - Repeat Other Side", cue: "", section: "Floor", duration: 15 },
-      { name: "Table Wag the Tail", cue: "", section: "Floor", duration: 10 },
-      { name: "Cat Arch  / Cat Lift (3 times)", cue: "", section: "Floor", duration: 15 },
-      { name: "Safety Zone", cue: "", section: "Floor", duration: 10 },
+      { name: "Plank", cue: "step or pop  back", section: "Power", duration: 12 },
+      { name: "Lower for 3, hold for 3, all the way down (repeat 2)", cue: "", section: "Power", duration: 16 },
+      { name: "Cobra to Down Dog -- lower to Safety Zone", cue: "", section: "Floor", duration: 13 },
+      { name: "Up to table, Cat Arch  / Cat Lift (2 times)", cue: "", section: "Floor", duration: 15 },
+      { name: "Split Table - left leg back, right hand in front", cue: "", section: "Floor", duration: 15 },
+      { name: "back to table, flip wrist back and forth", cue: "", section: "Floor", duration: 5 },
+      { name: "Split Table - right leg back, left hand in front", cue: "", section: "Floor", duration: 15 },
+      { name: "Table, flip wrist, Wag the Tail", cue: "", section: "Floor", duration: 10 },
+      { name: "Cat Lift  / Cat Arch (3 times)", cue: "", section: "Floor", duration: 17 },
+      { name: "Lower to Safety Zone", cue: "", section: "Floor", duration: 10 },
       { name: "Walk Hand Across Mat", cue: "", section: "Floor", duration: 8 },
       { name: "Walk Hand Across Mat Repeat Other Side", cue: "", section: "Floor", duration: 8 },
       { name: "Safety Zone", cue: "", section: "Floor", duration: 5 },
-      { name: "Come around onto Glutes", cue: "", section: "Going Home", duration: 5 },
+      { name: "Come around onto Glutes - Going Home", cue: "", section: "Going Home", duration: 5 },
       { name: "Human Cannonball", cue: "", section: "Going Home", duration: 8 },
       { name: "Bridge - squeeze glutes", cue: "", section: "Going Home", duration: 8 },
-      { name: "Repeat Human Cannonball to Bridge (2 more times)", cue: "", section: "Going Home", duration: 15 },
+      { name: "Repeat Human Cannonball to Bridge (2 more times)", cue: "", section: "Going Home", duration: 17 },
       { name: "Pinfall into Easy Twist (flop to right) - Knee Cross - breathe", cue: "", section: "Going Home", duration: 15 },
       { name: "Pinfall to Bridge to Human Cannonball - 2 times", cue: "", section: "Going Home", duration: 15 },
       { name: "Pinfall into Easy Twist (flop to left) - Opposite Knee Cross - breathe", cue: "", section: "Going Home", duration: 15 },
       { name: "Pinfall to Bridge to Human Cannonball - 2 times", cue: "", section: "Going Home", duration: 10 },
       { name: "Tight Tight Tight - kick out", cue: "", section: "Going Home", duration: 10 },
       { name: "Bend Knee, flop open relax – repeat opposite knee", cue: "", section: "Going Home", duration: 10 },
-      { name: "Dead Man - relax", cue: "", section: "Finish", duration: 15 },
-      { name: "roll up", cue: "", section: "Finish", duration: 5 },
-      { name: "Stretch Forward - repeat", cue: "", section: "Finish", duration: 8 },
-      { name: "Bang", cue: "", section: "Finish", duration: 5 },
+      { name: "Dead Man or Woman - relax", cue: "chill out", section: "Finish", duration: 12 },
+      { name: "roll up into sitting position - cross legged", cue: "roll shoulders back", section: "Finish", duration: 5 },
+      { name: "Reach Forward - (3 times)", cue: "get some length", section: "Finish", duration: 14 },
+      { name: "Fist to hand - warrior position -- Bang", cue: "biggest breath of day, kick it out", section: "Finish", duration: 7 },
     ];
 
     const sectionColors = {
@@ -187,10 +189,32 @@
       const intervalRef = useRef(null);
       const audioCtxRef = useRef(null);
       const isFirstRender = useRef(true);
+      const wakeLockRef = useRef(null);
 
       const move = moves[current];
       const color = sectionColors[move?.section] || "#FF6B35";
       const totalDuration = move?.duration || DEFAULT_DURATION;
+
+      // Wake lock — keep screen on while running, release when paused/done
+      useEffect(() => {
+        const requestWakeLock = async () => {
+          try {
+            if ('wakeLock' in navigator) {
+              wakeLockRef.current = await navigator.wakeLock.request('screen');
+            }
+          } catch(e) {}
+        };
+        const releaseWakeLock = async () => {
+          try {
+            if (wakeLockRef.current) {
+              await wakeLockRef.current.release();
+              wakeLockRef.current = null;
+            }
+          } catch(e) {}
+        };
+        if (running) { requestWakeLock(); } else { releaseWakeLock(); }
+        return () => { releaseWakeLock(); };
+      }, [running]);
 
       const wakeAudio = useCallback(() => {
         if (!audioCtxRef.current) {
