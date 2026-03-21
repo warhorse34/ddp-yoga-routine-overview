@@ -1,6 +1,6 @@
-# DDP Yoga – Energy Workout Timer
+# VibeFit Workout Timer
 
-A mobile-friendly workout timer for the DDP Yoga Energy routine. Built for use on your phone while exercising — large high-contrast text, audio countdown beeps, and voice announcements for each move.
+A mobile-friendly workout timer for various popular exercise routines. Inspired by the DDP Yoga Energy routine. Built for use on your phone while exercising — large high-contrast text, audio countdown beeps, and voice announcements for each move.
 
 ## Features
 
