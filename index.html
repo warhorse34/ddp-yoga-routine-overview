@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VibeFit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:   #0A0A0A;
+      --dark:    #111111;
+      --card:    #161616;
+      --border:  #222222;
+      --white:   #FFFFFF;
+      --dim:     #666666;
+      --energy:  #FF6B35;
+      --busydad: #CC44FF;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      padding: 0 1.5rem 4rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 3rem 0 2.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.8rem;
+      letter-spacing: 0.06em;
+      line-height: 1;
+      background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-top: 0.4rem;
+      font-weight: 300;
+    }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dim);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    /* ── Workout cards ── */
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      display: block;
+      text-decoration: none;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.4rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      border-radius: 16px 0 0 16px;
+    }
+
+    .card.energy { animation: fadeUp 0.6s 0.2s ease both; }
+    .card.energy::before { background: var(--energy); }
+    .card.energy:hover { border-color: var(--energy); }
+
+    .card.busydad { animation: fadeUp 0.6s 0.3s ease both; }
+    .card.busydad::before { background: var(--busydad); }
+    .card.busydad:hover { border-color: var(--busydad); }
+
+    .card-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .card.energy .card-tag { color: var(--energy); }
+    .card.busydad .card-tag { color: var(--busydad); }
+
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--dim);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    .card-arrow {
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.4rem;
+      color: var(--border);
+      transition: color 0.2s ease, right 0.2s ease;
+    }
+
+    .card:hover .card-arrow {
+      right: 1.2rem;
+    }
+
+    .card.energy:hover .card-arrow { color: var(--energy); }
+    .card.busydad:hover .card-arrow { color: var(--busydad); }
+
+    /* ── Disclaimer ── */
+    .disclaimer {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+
+    .disclaimer-title {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+
+    .disclaimer p {
+      font-size: 0.75rem;
+      color: #555;
+      line-height: 1.7;
+      font-weight: 300;
+      margin-bottom: 0.6rem;
+    }
+
+    .disclaimer p:last-child { margin-bottom: 0; }
+
+    .disclaimer strong {
+      color: #888;
+      font-weight: 500;
+    }
+
+    .disclaimer a {
+      color: #888;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.65rem;
+      color: #333;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: fadeUp 0.6s 0.5s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">VibeFit</div>
+    <div class="tagline">Personal workout timers that are very likely AI slop vibe coded by an overweight enthusiast of the DDP Yoga and Busy Dad Training programs</div>
+  </header>
+
+  <div class="section-label">Workouts</div>
+
+  <div class="cards">
+
+    <a class="card energy" href="https://warhorse34.github.io/vibe-fit/ddp-yoga/energy/index.html">
+      <div class="card-tag">DDP Yoga</div>
+      <div class="card-title">Energy</div>
+      <div class="card-desc">74 exercises · 8 sections · voice guided</div>
+      <span class="card-arrow">›</span>
+    </a>
+
+    <a class="card busydad" href="https://warhorse34.github.io/vibe-fit/variations/ddp-energy-busy-dad/index.html">
+      <div class="card-tag">DDP Yoga × Busy Dad</div>
+      <div class="card-title">Energy / Busy Dad Mix-Up</div>
+      <div class="card-desc">84 exercises · burpee intervals · voice guided</div>
+      <span class="card-arrow">›</span>
+    </a>
+
+  </div>
+
+  <div class="disclaimer">
+    <div class="disclaimer-title">Important Disclaimer</div>
+    <p>
+      <strong>This app has no affiliation with, endorsement from, or permission granted by DDP Yoga, Busy Dad Training, Diamond Dallas Page, Mike Edwards, or any related individuals or organizations.</strong>
+    </p>
+    <p>
+      These timers are personal practice tools created for entertainment purposes only. The workouts represented here are entirely ineffectual in this format — they are intended solely as quick reinforcement aids for people who already know these programs well.
+    </p>
+    <p>
+      <strong>Do not attempt these workouts without first learning the exercises as properly designed and taught by their creators.</strong> Performing exercises incorrectly can result in serious injury.
+    </p>
+    <p>
+      Please subscribe to and follow the official programs to ensure you are training safely and correctly, and so that the founders receive all credit and compensation they are due:
+    </p>
+    <p>
+      <a href="https://ddpyoga.com" target="_blank">ddpyoga.com</a> &nbsp;·&nbsp;
+      <a href="https://busydadtraining.com" target="_blank">busydadtraining.com</a>
+    </p>
+    <p>
+      Use of this app is entirely at your own risk. The creator of VibeFit accepts no liability whatsoever for any injury, loss, or damage arising from use of these timers.
+    </p>
+  </div>
+
+  <footer>VibeFit · Personal use only</footer>
+
+</body>
+</html>
