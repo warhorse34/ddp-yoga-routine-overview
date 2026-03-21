@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>DDP Yoga – Energy Workout</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0A0A0A; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type=number] { -moz-appearance: textfield; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef, useCallback } = React;
+
+    const DEFAULT_DURATION = 15;
+
+    const initialMoves = [
+      { name: "Pinfall position - Deep Breaths", cue: "Hands on Belly", section: "Warm-Up", duration: 25 },
+      { name: "Table into Cat Arch and Cat Lift (2 times)", cue: "", section: "Warm-Up", duration: 16 },
+      { name: "Push up into Down Dog into Walk Dog", cue: "curl toes", section: "Warm-Up", duration: 14 },
+      { name: "Lower into Table and then Plank – Hold", cue: "hold", section: "Warm-Up", duration: 10 },
+      { name: "Lower/Hold/Back to Plank (times 2)", cue: "lower slowly, repeat", section: "Warm-Up", duration: 15 },
+      { name: "Cobra into Down Dog - step or pounce", cue: "Step or pounce when done", section: "Warm-Up", duration: 14 },
+      { name: "Huddle Up, Forward Fold slowly up to touchdown", cue: "", section: "Warm-Up", duration: 15 },
+      { name: "Return to Standing, Glute Squeeze – Grab Ball (D.R)", cue: "fingers are fire hydrants", section: "Ignition", duration: 10 },
+      { name: "Inhale into Touchdown, exhale take it down (2 times)", cue: "", section: "Ignition", duration: 15 },
+      { name: "Diamond Cutter - Hulk it Up", cue: "look through your diamond", section: "Ignition", duration: 12 },
+      { name: "Shake Out", cue: "", section: "Ignition", duration: 5 },
+      { name: "Grab Ball into Touchdown – Gimme Gimme (left, right 2 times)", cue: "alternate", section: "Ignition", duration: 22 },
+      { name: "Diamond Cutter and shake it out", cue: "", section: "Ignition", duration: 15 },
+      { name: "Grab ball into Touchdown – then Huddle Up", cue: "", section: "Ignition", duration: 8 },
+      { name: "Fold Forward – Back to Bent Bar Back", cue: "chin tucked", section: "Ignition", duration: 8 },
+      { name: "Fold Forward – Back to Bent Bar Back", cue: "", section: "Ignition", duration: 8 },
+      { name: "Fold forward into Standing Split – Right Leg Up", cue: "", section: "Balance", duration: 14 },
+      { name: "Down into Runner's Lunge to Supported Lunge", cue: "", section: "Balance", duration: 10 },
+      { name: "Lunge – Grab Ball", cue: "deep breath", section: "Balance", duration: 10 },
+      { name: "DR Rows - Pull-In and push out (Dynamic Resistance) - 3 times", cue: "breath in on pull, out on push", section: "Balance", duration: 23 },
+      { name: "Sweep up into SuperStar", cue: "", section: "Balance", duration: 7 },
+      { name: "Right Hand to mat – twist Left Hand Up", cue: "", section: "Balance", duration: 15 },
+      { name: "Up into Supported Lunge – Dynamic Resistance Punches (3)", cue: "", section: "Balance", duration: 23 },
+      { name: "Sweep up into SuperStar", cue: "", section: "Balance", duration: 5 },
+      { name: "lean forward into Space Shuttle", cue: "", section: "Balance", duration: 8 },
+      { name: "Blast Off – Explode into Touchdown", cue: "", section: "Balance", duration: 7 },
+      { name: "Diamond Cutter – Shake Out", cue: "", section: "Balance", duration: 12 },
+      { name: "Water Break", cue: "", section: "Break", duration: 10 },
+      { name: "Grab ball into Touchdown – Huddle Up", cue: "", section: "Balance", duration: 8 },
+      { name: "Fold Forward – Back to Bent Bar Back", cue: "", section: "Balance", duration: 8 },
+      { name: "Reverse It - Standing Split – Left Leg Up", cue: "", section: "Balance", duration: 14 },
+      { name: "Down into Runner's Lunge to Supported Lunge", cue: "", section: "Balance", duration: 10 },
+      { name: "Lunge – Grab Ball", cue: "", section: "Balance", duration: 10 },
+      { name: "DR Rows - Pull-In and push out (Dynamic Resistance) - 3 times", cue: "breath in on pull, out on push", section: "Balance", duration: 23 },
+      { name: "Sweep up into SuperStar", cue: "", section: "Balance", duration: 7 },
+      { name: "Left fist to mat - twist Right Hand Up", cue: "open fingers wide", section: "Balance", duration: 15 },
+      { name: "Up into Supported Lunge – Dynamic Resistance Punches (3)", cue: "", section: "Balance", duration: 21 },
+      { name: "Sweep up into SuperStar", cue: "", section: "Balance", duration: 5 },
+      { name: "lean forward into Space Shuttle", cue: "", section: "Balance", duration: 8 },
+      { name: "Blast Off – Explode into Touchdown", cue: "", section: "Balance", duration: 7 },
+      { name: "Diamond Cutter – Shake Out", cue: "", section: "Balance", duration: 12 },
+      { name: "Water Break", cue: "", section: "Break", duration: 10 },
+      { name: "Grab Ball – Touchdown - Gimme Gimme", cue: "", section: "Power", duration: 15 },
+      { name: "Exploding Knees - 5 times each side", cue: "", section: "Power", duration: 17 },
+      { name: "Touchdown – Diamond Cutter", cue: "", section: "Power", duration: 12 },
+      { name: "Huddle Up – Bar Back", cue: "", section: "Power", duration: 7 },
+      { name: "Plank", cue: "step or pop  back", section: "Power", duration: 12 },
+      { name: "Lower for 3, hold for 3, all the way down (repeat 2)", cue: "", section: "Power", duration: 16 },
+      { name: "Cobra to Down Dog -- lower to Safety Zone", cue: "", section: "Floor", duration: 13 },
+      { name: "Up to table, Cat Arch  / Cat Lift (2 times)", cue: "", section: "Floor", duration: 16 },
+      { name: "Split Table - left leg back, right hand in front", cue: "", section: "Floor", duration: 15 },
+      { name: "back to table, flip wrist back and forth", cue: "", section: "Floor", duration: 5 },
+      { name: "Split Table - right leg back, left hand in front", cue: "", section: "Floor", duration: 15 },
+      { name: "Table, flip wrist, Wag the Tail", cue: "", section: "Floor", duration: 10 },
+      { name: "Cat Lift  / Cat Arch (3 times)", cue: "", section: "Floor", duration: 21 },
+      { name: "Lower to Safety Zone", cue: "", section: "Floor", duration: 10 },
+      { name: "Walk Hand Across Mat", cue: "", section: "Floor", duration: 8 },
+      { name: "Walk Hand Across Mat Repeat Other Side", cue: "", section: "Floor", duration: 8 },
+      { name: "Safety Zone", cue: "", section: "Floor", duration: 5 },
+      { name: "Come around onto Glutes - Going Home", cue: "", section: "Going Home", duration: 5 },
+      { name: "Human Cannonball", cue: "", section: "Going Home", duration: 8 },
+      { name: "Bridge - squeeze glutes", cue: "", section: "Going Home", duration: 8 },
+      { name: "Repeat Human Cannonball to Bridge (2 more times)", cue: "", section: "Going Home", duration: 19 },
+      { name: "Pinfall into Easy Twist (flop to right) - Knee Cross - breathe", cue: "", section: "Going Home", duration: 19 },
+      { name: "Pinfall to Bridge to Human Cannonball - 2 times", cue: "", section: "Going Home", duration: 19 },
+      { name: "Pinfall into Easy Twist (flop to left) - Opposite Knee Cross - breathe", cue: "", section: "Going Home", duration: 19 },
+      { name: "Pinfall to Bridge to Human Cannonball - 2 times", cue: "", section: "Going Home", duration: 15 },
+      { name: "Tight Tight Tight - kick out", cue: "", section: "Going Home", duration: 7 },
+      { name: "Bend Knee, flop open relax – repeat opposite knee", cue: "", section: "Going Home", duration: 8 },
+      { name: "Dead Man or Woman - relax", cue: "chill out", section: "Finish", duration: 12 },
+      { name: "roll up into sitting position - cross legged", cue: "roll shoulders back", section: "Finish", duration: 6 },
+      { name: "Reach Forward - (3 times)", cue: "get some length", section: "Finish", duration: 25 },
+      { name: "Fist to hand - warrior position - biggest breath of the day", cue: "biggest breath of day, kick it out", section: "Finish", duration: 11 },
+      { name: "Push it out ..... Bang!", cue: "biggest breath of day, kick it out", section: "Finish", duration: 6 },
+    ];
+
+    const sectionColors = {
+      "Warm-Up":    "#FF6B35",
+      "Ignition":   "#F0A500",
+      "Balance":    "#4ECDC4",
+      "Break":      "#888888",
+      "Power":      "#FF3366",
+      "Floor":      "#6C9BCF",
+      "Going Home": "#74B9E7",
+      "Finish":     "#FFD700",
+    };
+
+    // ── Edit Screen ─────────────────────────────────────────────────────────────
+    function EditScreen({ moves, onSave, onCancel }) {
+      const [drafts, setDrafts] = useState(moves.map(m => ({ ...m })));
+      const sections = [...new Set(drafts.map(m => m.section))];
+
+      const update = (i, val) => {
+        const n = parseInt(val);
+        const updated = [...drafts];
+        updated[i] = { ...updated[i], duration: isNaN(n) || n < 1 ? DEFAULT_DURATION : n };
+        setDrafts(updated);
+      };
+
+      return (
+        <div style={{ minHeight: "100vh", background: "#0A0A0A", color: "white", maxWidth: "430px", margin: "0 auto" }}>
+          <div style={{
+            position: "sticky", top: 0, background: "#0A0A0A",
+            padding: "1.2rem 1.5rem", borderBottom: "1px solid #1E1E1E",
+            display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 10
+          }}>
+            <button onClick={onCancel} style={{ background: "none", border: "none", color: "#888", fontSize: "1rem", cursor: "pointer" }}>
+              ✕ Cancel
+            </button>
+            <span style={{ fontWeight: "700", fontSize: "1rem", letterSpacing: "0.05em" }}>SET DURATIONS</span>
+            <button onClick={() => onSave(drafts)} style={{
+              background: "#FF6B35", border: "none", color: "white",
+              padding: "0.4rem 1rem", borderRadius: "20px", fontWeight: "700", fontSize: "0.9rem", cursor: "pointer"
+            }}>Save</button>
+          </div>
+          <div style={{ padding: "0.5rem 0 4rem" }}>
+            {sections.map(sec => (
+              <div key={sec}>
+                <div style={{
+                  padding: "1rem 1.5rem 0.4rem", fontSize: "0.65rem",
+                  letterSpacing: "0.18em", textTransform: "uppercase",
+                  color: sectionColors[sec], fontWeight: "700"
+                }}>{sec}</div>
+                {drafts.map((m, i) => m.section !== sec ? null : (
+                  <div key={i} style={{
+                    display: "flex", alignItems: "center",
+                    padding: "0.75rem 1.5rem", borderBottom: "1px solid #141414"
+                  }}>
+                    <div style={{ flex: 1, fontSize: "0.95rem", lineHeight: 1.3, paddingRight: "1rem" }}>
+                      {m.name}
+                      <div style={{ fontSize: "0.75rem", color: "#555", marginTop: "2px" }}>{m.cue}</div>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                      <input type="number" value={m.duration || DEFAULT_DURATION} min={1} max={300}
+                        onChange={e => update(i, e.target.value)}
+                        style={{
+                          width: "56px", background: "#1A1A1A", border: "1px solid #333",
+                          color: "white", borderRadius: "8px", padding: "0.4rem 0.5rem",
+                          fontSize: "1rem", textAlign: "center", fontWeight: "700"
+                        }}
+                      />
+                      <span style={{ fontSize: "0.7rem", color: "#555" }}>sec</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // ── Main App ─────────────────────────────────────────────────────────────────
+    function App() {
+      const [moves, setMoves] = useState(() =>
+        initialMoves.map(m => ({ ...m, duration: m.duration || DEFAULT_DURATION }))
+      );
+      const [current, setCurrent] = useState(0);
+      const [timeLeft, setTimeLeft] = useState(null);
+      const [running, setRunning] = useState(false);
+      const [done, setDone] = useState(false);
+      const [editing, setEditing] = useState(false);
+      const intervalRef = useRef(null);
+      const audioCtxRef = useRef(null);
+      const isFirstRender = useRef(true);
+      const wakeLockRef = useRef(null);
+
+      const move = moves[current];
+      const color = sectionColors[move?.section] || "#FF6B35";
+      const totalDuration = move?.duration || DEFAULT_DURATION;
+
+      // Wake lock — keep screen on while running, release when paused/done
+      useEffect(() => {
+        const requestWakeLock = async () => {
+          try {
+            if ('wakeLock' in navigator) {
+              wakeLockRef.current = await navigator.wakeLock.request('screen');
+            }
+          } catch(e) {}
+        };
+        const releaseWakeLock = async () => {
+          try {
+            if (wakeLockRef.current) {
+              await wakeLockRef.current.release();
+              wakeLockRef.current = null;
+            }
+          } catch(e) {}
+        };
+        if (running) { requestWakeLock(); } else { releaseWakeLock(); }
+        return () => { releaseWakeLock(); };
+      }, [running]);
+
+      const wakeAudio = useCallback(() => {
+        if (!audioCtxRef.current) {
+          audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtxRef.current.state === "suspended") audioCtxRef.current.resume();
+      }, []);
+
+      const playBeep = useCallback((freq = 880, dur = 0.12, vol = 0.4) => {
+        try {
+          wakeAudio();
+          const ctx = audioCtxRef.current;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+          gain.gain.setValueAtTime(vol, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
+          osc.start(ctx.currentTime);
+          osc.stop(ctx.currentTime + dur);
+        } catch(e) {}
+      }, [wakeAudio]);
+
+      const playCountdown = useCallback((n) => {
+        if (n === 3) playBeep(660, 0.1, 0.3);
+        if (n === 2) playBeep(660, 0.1, 0.3);
+        if (n === 1) playBeep(1100, 0.25, 0.5);
+      }, [playBeep]);
+
+      const speak = useCallback((text) => {
+        try {
+          window.speechSynthesis.cancel();
+          const u = new SpeechSynthesisUtterance(text);
+          u.rate = 0.95; u.pitch = 1.0; u.volume = 1.0;
+          window.speechSynthesis.speak(u);
+        } catch(e) {}
+      }, []);
+
+      // Announce move name on change (skip first render)
+      useEffect(() => {
+        if (isFirstRender.current) { isFirstRender.current = false; return; }
+        speak(moves[current].name);
+      }, [current]);
+
+      useEffect(() => { setTimeLeft(totalDuration); }, [current, totalDuration]);
+
+      const goTo = useCallback((index, keepRunning = false) => {
+        clearInterval(intervalRef.current);
+        if (index >= moves.length) { setDone(true); setRunning(false); return; }
+        setCurrent(index);
+        if (!keepRunning) setRunning(false);
+      }, [moves.length]);
+
+      const goNext = useCallback(() => goTo(current + 1, running), [current, running, goTo]);
+      const goPrev = useCallback(() => goTo(Math.max(0, current - 1), false), [current, goTo]);
+
+      useEffect(() => {
+        clearInterval(intervalRef.current);
+        if (!running) return;
+        intervalRef.current = setInterval(() => {
+          setTimeLeft(t => {
+            const next = t - 1;
+            if (next <= 0) { goNext(); return null; }
+            if (next <= 3) playCountdown(next);
+            return next;
+          });
+        }, 1000);
+        return () => clearInterval(intervalRef.current);
+      }, [running, goNext, playCountdown]);
+
+      const handleSave = (updated) => {
+        setMoves(updated);
+        setEditing(false);
+        setTimeLeft(updated[current].duration || DEFAULT_DURATION);
+      };
+
+      const reset = () => {
+        clearInterval(intervalRef.current);
+        setCurrent(0);
+        setTimeLeft(moves[0].duration || DEFAULT_DURATION);
+        setDone(false);
+        setRunning(false);
+        isFirstRender.current = true;
+      };
+
+      if (editing) return <EditScreen moves={moves} onSave={handleSave} onCancel={() => setEditing(false)} />;
+
+      if (done) return (
+        <div style={{
+          minHeight: "100vh", display: "flex", flexDirection: "column",
+          alignItems: "center", justifyContent: "center",
+          background: "#0A0A0A", color: "white", padding: "2rem", textAlign: "center", gap: "1.5rem"
+        }}>
+          <div style={{ fontSize: "6rem" }}>💥</div>
+          <div style={{ fontSize: "3rem", fontWeight: "900", color: "#FFD700", letterSpacing: "0.05em" }}>BANG!</div>
+          <div style={{ fontSize: "1.1rem", color: "#666" }}>Energy routine complete.</div>
+          <button onClick={reset} style={{
+            marginTop: "1rem", padding: "1.1rem 3rem", background: "#FF6B35",
+            color: "white", border: "none", borderRadius: "50px",
+            fontSize: "1.1rem", fontWeight: "800", cursor: "pointer"
+          }}>DO IT AGAIN</button>
+        </div>
+      );
+
+      const t = timeLeft ?? totalDuration;
+      const circumference = 2 * Math.PI * 52;
+
+      // Time remaining = current exercise time left + all future exercise durations
+      const futureSeconds = moves.slice(current + 1).reduce((sum, m) => sum + (m.duration || 15), 0);
+      const totalSecondsLeft = (t ?? 0) + futureSeconds;
+      const minsLeft = Math.floor(totalSecondsLeft / 60);
+      const secsLeft = totalSecondsLeft % 60;
+      const timeRemaining = `${minsLeft}:${String(secsLeft).padStart(2, '0')}`;
+      const dashOffset = circumference * (1 - Math.max(0, Math.min(1, t / totalDuration)));
+      const progressPct = (current / (moves.length - 1)) * 100;
+
+      return (
+        <div style={{
+          minHeight: "100vh", background: "#0A0A0A", color: "white",
+          display: "flex", flexDirection: "column",
+          maxWidth: "430px", margin: "0 auto", userSelect: "none"
+        }}>
+
+          {/* Top bar */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1rem 1.5rem 0.5rem" }}>
+            <div style={{ fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#444" }}>
+              DDP YOGA · ENERGY
+            </div>
+            <div style={{ display: "flex", gap: "0.8rem", alignItems: "center" }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+                <span style={{ fontSize: "1rem", fontWeight: "700", color: "#FFFFFF", fontVariantNumeric: "tabular-nums" }}>{timeRemaining}</span>
+                <span style={{ fontSize: "0.55rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#444" }}>remaining</span>
+              </div>
+              <span style={{ color: "#2A2A2A", fontSize: "0.8rem" }}>|</span>
+              <span style={{ fontSize: "0.8rem", color: "#444" }}>{current + 1} / {moves.length}</span>
+              <button onClick={() => setEditing(true)} style={{
+                background: "none", border: "1px solid #2A2A2A", color: "#666",
+                width: "32px", height: "32px", borderRadius: "50%",
+                fontSize: "0.85rem", cursor: "pointer", display: "flex",
+                alignItems: "center", justifyContent: "center"
+              }}>⚙</button>
+            </div>
+          </div>
+
+          {/* Progress bar */}
+          <div style={{ height: "2px", background: "#1A1A1A", margin: "0 1.5rem" }}>
+            <div style={{ height: "100%", width: `${progressPct}%`, background: color, transition: "width 0.4s ease", borderRadius: "1px" }} />
+          </div>
+
+          {/* Section label */}
+          <div style={{ padding: "1rem 1.5rem 0" }}>
+            <span style={{ fontSize: "0.72rem", letterSpacing: "0.2em", textTransform: "uppercase", color: color, fontWeight: "700" }}>
+              {move.section}
+            </span>
+          </div>
+
+          {/* Move name */}
+          <div style={{ flex: 1, padding: "0.8rem 1.5rem 0", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+            <div style={{ fontSize: "clamp(2.2rem, 9vw, 3rem)", fontWeight: "900", lineHeight: 1.1, color: "#FFFFFF", letterSpacing: "-0.02em", marginBottom: "0.8rem" }}>
+              {move.name}
+            </div>
+            <div style={{ fontSize: "clamp(1.1rem, 4.5vw, 1.4rem)", color: "#777", fontWeight: "400", lineHeight: 1.4 }}>
+              {move.cue}
+            </div>
+          </div>
+
+          {/* Timer ring */}
+          <div style={{ display: "flex", justifyContent: "center", padding: "1.5rem 1.5rem 0.5rem" }}>
+            <svg width="130" height="130" viewBox="0 0 130 130">
+              <circle cx="65" cy="65" r="52" fill="none" stroke="#1A1A1A" strokeWidth="6" />
+              <circle cx="65" cy="65" r="52" fill="none" stroke={color} strokeWidth="6"
+                strokeLinecap="round"
+                strokeDasharray={circumference}
+                strokeDashoffset={dashOffset}
+                transform="rotate(-90 65 65)"
+                style={{ transition: running ? "stroke-dashoffset 0.9s linear" : "none" }}
+              />
+              <text x="65" y="60" textAnchor="middle" fill="white"
+                style={{ fontSize: "2.4rem", fontWeight: "900", fontFamily: "inherit" }}>{t}</text>
+              <text x="65" y="80" textAnchor="middle" fill="#444"
+                style={{ fontSize: "0.62rem", fontFamily: "inherit", letterSpacing: "0.15em" }}>SECONDS</text>
+            </svg>
+          </div>
+
+          {/* Controls */}
+          <div style={{ padding: "0.5rem 1.5rem 2.5rem", display: "flex", gap: "0.8rem", alignItems: "center" }}>
+            <button onClick={goPrev} disabled={current === 0} style={{
+              width: "60px", height: "60px", borderRadius: "50%",
+              background: "#141414", border: "1px solid #2A2A2A",
+              color: current === 0 ? "#2A2A2A" : "#FFFFFF",
+              fontSize: "1.6rem", cursor: current === 0 ? "default" : "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center"
+            }}>‹</button>
+
+            <button onClick={() => { wakeAudio(); setRunning(r => !r); }} style={{
+              flex: 1, height: "66px", borderRadius: "16px",
+              background: running ? "#141414" : color,
+              border: running ? `2px solid ${color}` : "none",
+              color: running ? color : "#000",
+              fontSize: "1.1rem", fontWeight: "900",
+              cursor: "pointer", letterSpacing: "0.12em", transition: "all 0.2s"
+            }}>
+              {running ? "⏸  PAUSE" : "▶  START"}
+            </button>
+
+            <button onClick={goNext} style={{
+              width: "60px", height: "60px", borderRadius: "50%",
+              background: "#141414", border: `1px solid ${color}55`,
+              color: "#FFFFFF", fontSize: "1.6rem", cursor: "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center"
+            }}>›</button>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
